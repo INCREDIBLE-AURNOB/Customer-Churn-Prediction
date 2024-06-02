@@ -24,6 +24,18 @@ def process(df,options):
                  'StreamingMovies_No_internet_service', 'StreamingMovies_Yes', 'Contract_One_year', 'Contract_Two_year', 'PaymentMethod_Electronic_check']
         df=pd.get_dummies(df).reindex(columns=columns, fill_value=0)
         
+    else:
+        print("Invalid Information")
+        
+    #Feature Scaling
+    ms=MinMaxScaler()
+    df['tenure']=ms.fit_transform(df[['tenure']])
+    df['TotalCharges']=ms.fit_transform(df[['TotalCharges']])
+    df['MonthlyCharges']=ms.fit_transform(df[['MonthlyCharges']])
+    
+    return df
+        
+        
     
     
     

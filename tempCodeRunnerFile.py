@@ -1,10 +1,9 @@
-
 #Import libraries
 import streamlit as st
 import pandas as pd
 import numpy as np
 from PIL import Image
-
+import re
 #load the model from disk
 import joblib
 model = joblib.load(r"model.sav")
@@ -14,13 +13,13 @@ from conf import preprocess
 
 def main():
     #Setting Application title
-    st.title('Customer Churn Prediction App')
+    st.title('Telco Customer Churn Prediction App')
 
       #Setting Application description
-    # st.markdown("""
-    #  :dart:  This Streamlit app is made to predict customer churn in a ficitional telecommunication use case.
-    # The application is functional for both online prediction and batch data prediction. \n
-    # """)
+    st.markdown("""
+     :dart:  This Streamlit app is made to predict customer churn in a ficitional telecommunication use case.
+    The application is functional for both online prediction and batch data prediction. \n
+    """)
     st.markdown("<h3></h3>", unsafe_allow_html=True)
 
     #Setting Application sidebar default
@@ -108,19 +107,12 @@ def main():
                 prediction = model.predict(preprocess_df)
                 prediction_df = pd.DataFrame(prediction, columns=["Predictions"])
                 prediction_df = prediction_df.replace({1:'Yes, the customer will terminate the service.', 
-                                                    0:'No, the customer is happy with  Services.'})
+                                                    0:'No, the customer is happy with Telco Services.'})
 
                 st.markdown("<h3></h3>", unsafe_allow_html=True)
                 st.subheader('Prediction')
                 st.write(prediction_df)
             
 if __name__ == '__main__':
-        main()
-
-
-
-
-
-
-
-
+    main()
+        
